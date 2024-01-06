@@ -1,0 +1,5 @@
+/*
+   formatter.js
+
+   file contains functions that prettify returned mySQL data for display to user
+*/
