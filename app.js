@@ -7,7 +7,17 @@
 
 import inquirer from 'inquirer';
 
-const questions = [{}];
+const questions = [
+    {
+        'type': 'list',
+        'name': 'menuSelection',
+        'choices': [
+            'VIEW ALL departments',
+            'VIEW ALL roles',
+            'VIEW ALL employees'
+        ]
+    }
+];
 
 const app = function()
 {
