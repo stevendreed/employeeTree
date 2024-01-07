@@ -14,7 +14,16 @@ const questions = [
         'choices': [
             'VIEW ALL departments',
             'VIEW ALL roles',
-            'VIEW ALL employees'
+            'VIEW ALL employees',
+            'ADD A department',
+            'ADD A role',
+            'ADD A employee',
+            'UPDATE A department',
+            'UPDATE A role',
+            'UPDATE AN employee',
+            'DELETE A department (caution!)',
+            'DELETE A role (caution!)',
+            'DELETE AN employee (caution!)'
         ]
     }
 ];
