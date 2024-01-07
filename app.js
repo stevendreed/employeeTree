@@ -6,7 +6,22 @@
 */
 
 const inquirer = require('inquirer');
-const node = require('node');
 
 
 
+const app = function()
+{
+    inquirer
+        .prompt(questions)
+        .then(answers =>
+            {
+                console.log('\nSTART ANSWERS:\n',{...answers},'\nEND ANSWERS');
+            })
+        .catch(err =>
+            {
+                console.log(`\nSTART ERROR:\n`,`${err}`,`\nEND ERROR`);
+            });
+}
+
+
+app();
