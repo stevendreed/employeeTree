@@ -10,7 +10,7 @@ USE company_tree;
         name VARCHAR(30) NOT NULL UNIQUE,
         PRIMARY KEY (id)
 	);
-    CREATE TABLE role(
+    CREATE TABLE dept_role(
 		id int NOT NULL AUTO_INCREMENT,
         title VARCHAR(30) NOT NULL,
         salary DECIMAL,
@@ -28,7 +28,7 @@ USE company_tree;
         manager_id INT,
         PRIMARY KEY (id),
         FOREIGN KEY (role_id)
-			REFERENCES role(id)
+			REFERENCES dept_role(id)
             ON DELETE SET NULL,
 		FOREIGN KEY (manager_id)
 			REFERENCES employee(id)
