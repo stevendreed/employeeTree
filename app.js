@@ -5,7 +5,7 @@
    note: function app() ~= main()
 */
 
-const inquirer = import('inquirer');
+import inquirer from 'inquirer';
 
 const questions = [{}];
 
