@@ -6,12 +6,12 @@ CREATE DATABASE company_tree;
 
 USE company_tree;
 	CREATE TABLE department(
-		id int NOT NULL,
+		id int NOT NULL AUTO_INCREMENT,
         name VARCHAR(30) NOT NULL UNIQUE,
         PRIMARY KEY (id)
 	);
     CREATE TABLE role(
-		id int NOT NULL,
+		id int NOT NULL AUTO_INCREMENT,
         title VARCHAR(30) NOT NULL,
         salary DECIMAL,
         department_id INT,
@@ -21,7 +21,7 @@ USE company_tree;
             ON DELETE SET NULL
     );
     CREATE TABLE employee(
-		id int NOT NULL,
+		id int NOT NULL AUTO_INCREMENT,
         first_name VARCHAR(30),
         last_name VARCHAR(30),
         role_id INT,
