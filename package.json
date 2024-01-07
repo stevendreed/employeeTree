@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Grow the understanding about your organization by tracking, organizing, and searching employees and departments with ease!",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Steven D Reed",
   "license": "ISC",
   "dependencies": {
     "inquirer": "^9.2.12",

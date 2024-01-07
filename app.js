@@ -5,9 +5,9 @@
    note: function app() ~= main()
 */
 
-const inquirer = require('inquirer');
+const inquirer = import('inquirer');
 
-
+const questions = [{}];
 
 const app = function()
 {
