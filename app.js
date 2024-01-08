@@ -8,7 +8,13 @@
 import inquirer from 'inquirer';
 
 // const express = require('express');
-import mysql from 'mysql';
+import mysql from 'mysql2';
+import queries from './controller/queries.js';
+import dotenv from 'dotenv/config';
+
+// require('dotenv').config();
+
+// console.log(process.env);
 
 const db = mysql.createConnection(
     {
@@ -19,6 +25,18 @@ const db = mysql.createConnection(
     },
     console.log(`connected to ${process.env.DB_NAME} as ${process.env.DB_USER}`)
 );
+
+// hack way to do this : debug .env way @TODO
+// const db = mysql.createConnection(
+//     {
+//         host : 'localhost',
+//         database: 'company_tree',
+//         user: 'root',
+//         password: 'password'
+//     },
+//     console.log('connected to company_tree')
+// );
+
 
 const questions = [
     {
@@ -46,6 +64,24 @@ const questions = [
     // }
 ];
 
+const queryDb = function(query)
+{
+    return new Promise(function(res, rej)
+    {
+        db.query(query, 
+            function(err, rows){
+                if (!rows)
+                {
+                    throw Error(`no rows: ${query} is undefined.`);
+                }
+                else
+                {
+                    resolve(rows);
+                }
+            })
+    })
+}
+
 const mainMenu = async function()
 {
     return inquirer
@@ -65,10 +101,40 @@ const mainMenu = async function()
                 */
                 if (answers.menuSelection !== 'QUIT the application')
                 {
-                    switch (answers)
+                    switch (answers.menuSelection)
                     {
-                        case questions[0].choices[0]:
-                            db.query()
+                        case 'VIEW ALL departments':
+                            // console.log('ping!');
+                            // db.query(queries['VIEW ALL departments'])
+                            //     .then(response =>
+                            //     {
+                            //         console.log(response);
+                            //     })
+                            //     .catch(err =>
+                            //     {
+                            //         console.log(`\nSTART ERROR:\n`,err,`\nEND ERROR`);
+                            //     });
+                            // let dbResp = db.query(queries['VIEW ALL DEPARTMENTS'],
+                            //     function(err, rows)
+                            //     {
+                            //         if (rows === undefined)
+                            //         {
+                            //             throw new Error('rows is undefined: ', err);
+                            //         }
+                            //         else
+                            //         {
+                            //             console.log(rows);
+                            //         }
+                            //     })
+                            queryDb(queries['VIEW ALL departments'])
+                                .then(result => 
+                                    {
+                                        render(result);
+                                    })
+                                .catch(err => 
+                                    {
+                                        console.log(err)
+                                    });
                             break;
                     
                         default:
@@ -108,8 +174,15 @@ const app = async function()
     //             console.log(`\nSTART ERROR:\n`,`${err}`,`\nEND ERROR`);
     //         });
     // } while (answers.continue === 'y' );
-
+    db.connect(err => {
+        if (err)
+        {
+            console.log('\nERROR connecting to MySQL DB');
+        }
+        console.log('connected to mySQL DB :)');
+    })
     mainMenu();
+    db.end();
 }
 
 
