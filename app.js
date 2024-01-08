@@ -7,6 +7,19 @@
 
 import inquirer from 'inquirer';
 
+// const express = require('express');
+import mysql from 'mysql';
+
+const db = mysql.createConnection(
+    {
+        host: 'localhost', 
+        database: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD
+    },
+    console.log(`connected to ${process.env.DB_NAME} as ${process.env.DB_USER}`)
+);
+
 const questions = [
     {
         'type': 'list',
@@ -23,13 +36,14 @@ const questions = [
             'UPDATE AN employee',
             'DELETE A department (caution!)',
             'DELETE A role (caution!)',
-            'DELETE AN employee (caution!)'
+            'DELETE AN employee (caution!)',
+            'QUIT the application'
         ]
     },
-    {
-        'type': 'confirm',
-        'name': 'continue',
-    }
+    // {
+    //     'type': 'confirm',
+    //     'name': 'continue',
+    // }
 ];
 
 const mainMenu = async function()
@@ -49,8 +63,17 @@ const mainMenu = async function()
                    avoids potential problem of an infinite loop w/o hitting our
                    base case
                 */
-                if (answers.continue)
+                if (answers.menuSelection !== 'QUIT the application')
                 {
+                    switch (answers)
+                    {
+                        case questions[0].choices[0]:
+                            db.query()
+                            break;
+                    
+                        default:
+                            break;
+                    }
                     return mainMenu();
                 }
                 else
@@ -63,6 +86,8 @@ const mainMenu = async function()
                 console.log(`\nSTART ERROR:\n`,`${err}`,`\nEND ERROR`);
             });
 }
+
+
 
 const app = async function()
 {
