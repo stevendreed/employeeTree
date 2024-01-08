@@ -26,18 +26,6 @@ const db = mysql.createConnection(
     console.log(`connected to ${process.env.DB_NAME} as ${process.env.DB_USER}`)
 );
 
-// hack way to do this : debug .env way @TODO
-// const db = mysql.createConnection(
-//     {
-//         host : 'localhost',
-//         database: 'company_tree',
-//         user: 'root',
-//         password: 'password'
-//     },
-//     console.log('connected to company_tree')
-// );
-
-
 const questions = [
     {
         'type': 'list',
